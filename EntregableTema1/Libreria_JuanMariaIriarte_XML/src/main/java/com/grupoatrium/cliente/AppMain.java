@@ -25,9 +25,6 @@ public class AppMain {
 		// Levantar el contexto de Spring
 
 		// Crear el contenedor de beans a partir del archivo
-		// Crear el contenedor de beans a partir del archivo
-		// Crear el contenedor de beans a partir del archivo
-		// Crear el contenedor de beans a partir del archivo
 
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
