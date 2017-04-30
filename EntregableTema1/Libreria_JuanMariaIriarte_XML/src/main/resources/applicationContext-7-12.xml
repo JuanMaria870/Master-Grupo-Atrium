@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	default-init-method="initMetodo" default-destroy-method="destroyMetodo"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- Esto es necesario para el tercer método de Ciclo de vida
+	default-init-method="init" default-destroy-method="destroyMetodo" -->
+	
+	<!-- 7- Bean Interno  -->
+	<bean id="libro2" class="com.grupoatrium.modelo.Libro">
+			<property name="isbn" value="345678910-A-356-BT" />
+			<property name="titulo" value="Almixuwanadu" />
+			<property name="editorial" ref="editorial5.4"/>
+			<property name="publicacion" value="3000" />
+			<property name="precio" value="19.50" />
+			<property name="descripcion" value="Chachiguay" />
+			<property name="autores">
+			
+				<list value-type="com.grupoatrium.modelo.Autor">
+	
+					<!-- Bean interno -->
+					<bean id="autor7.1" class="com.grupoatrium.modelo.Autor">
+						<property name="comentarios" value="Del Director" />
+						<property name="nacionalidad" value="Español" />
+						<property name="nombre" value="autor7.1" />
+					</bean>
+					
+					<!-- Bean interno -->
+					<bean id="autor7.2" class="com.grupoatrium.modelo.Autor">
+						<property name="comentarios" value="Del Director" />
+						<property name="nacionalidad" value="Español" />
+						<property name="nombre" value="autor7.2" />
+					</bean>
+	
+				</list>
+			</property>
+	</bean>
+	
+	<!-- 8- Herencia y bean abstracto-->
+		<!-- Con clase asociada -->
+		
+		<bean id="autor8.1" class="com.grupoatrium.modelo.Autor" abstract="true">
+			<property name="comentarios" value="Del Director" />
+			<property name="nacionalidad" value="Español" />
+		</bean>
+		
+		<bean id="autor8.2" class="com.grupoatrium.modelo.Autor" parent="autor8.1">
+			<property name="nombre" value="autor8.2" />
+		</bean>
+		
+		<!-- Sin clase asociada -->
+		<bean id="autor8.3" abstract="true">
+			<property name="comentarios" value="Del Director" />
+			<property name="nacionalidad" value="Español" />
+		</bean>
+		
+		<bean id="autor8.4" class="com.grupoatrium.modelo.Autor" parent="autor8.3">
+			<property name="nombre" value="autor8.4" />
+		</bean>
+	
+	<!-- 9- Factorías -->
+		<!-- Factoría estática -->
+		<bean id="direccionExtra9.1" class="com.grupoatrium.modelo.extra.DireccionExtra" factory-method="getInstance">
+			<property name="calle" value="Pl/ Gafaut" />
+			<property name="numero" value="666555444" />
+			<property name="poblacion" value="Vinalesa" />		
+			<property name="cp" value="46114" />		
+			<property name="provincia" value="Valencia" />		
+		</bean>
+
+		<!-- Factoria dinámica -->	
+		<bean id="servicio" class="com.grupoatrium.modelo.extra.ServicioDireccionExtra" /> 
+		<bean id="direccionExtra9.2" class="com.grupoatrium.modelo.extra.DireccionExtra" 
+			factory-bean="servicio" factory-method="getDirection"  /> 
+			
+	<!-- 10- Ciclo de vida -->
+		<!-- Init y destroy por defecto declarados en el contexto -->
+		<bean id="autor10.1" class="com.grupoatrium.modelo.extra.AutorExtra">
+			<property name="comentarios" value="Del Director EXTRA" />
+			<property name="nacionalidad" value="Español" />
+			<property name="nombre" value="autor10.1" />
+		</bean>
+		
+		<!-- Init y destroy específicos declarados en el bean -->
+		<bean id="autor10.2" class="com.grupoatrium.modelo.extra.AutorExtra"
+			init-method="initMetodo2" destroy-method="destroyMetodo2">
+			<property name="comentarios" value="Del Director EXTRA" />
+			<property name="nacionalidad" value="Español" />
+			<property name="nombre" value="autor10.2" />
+		</bean>
+		
+	<!-- 11 -Cargamos el archivo de propiedades base de datos -->
+	<!--<bean
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations">
+				<list>
+					<value>classpath:config/data-source.properties</value>
+					<value>classpath:config/data-source-test.properties</value>
+				</list>
+			</property>
+	
+			<property name="ignoreUnresolvablePlaceholders" value="true" />
+		</bean> -->
+		<bean id="prodPropertyGroup" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations" value="classpath:config/data-source.properties"/>
+			<property name="placeholderPrefix" value="${dbprod."/>
+		</bean>
+		
+		<bean id="testPropertyGroup" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations" value="classpath:config/data-source-test.properties"/>
+			<property name="placeholderPrefix" value="${dbtest."/>
+		</bean>
+			
+		<!-- Inyectamos las propiedades del bean con los datos del archivo de propiedades -->
+		
+		<bean id="connectionMgr" class="com.grupoatrium.persistencia.impl.ConnectionMgr">
+			<property name="driver" value="${dbprod.driver}" />
+			<property name="url" value="${dbprod.url}" />
+			<property name="user" value="${dbprod.user}" />
+			<property name="password" value="${dbprod.pw}" />
+		</bean>
+		
+		<bean id="connectionMgr2" class="com.grupoatrium.persistencia.impl.ConnectionMgr"
+			autowire-candidate="false">
+			<property name="driver" value="${dbtest.driver}" />
+			<property name="url" value="${dbtest.url}" />
+			<property name="user" value="${dbtest.user}" />
+			<property name="password" value="${dbtest.pw}" />
+		</bean>
+		
+		<bean id="conexion" abstract="true">
+			<property name="connMgr" ref="connectionMgr"/>
+		</bean>
+		
+		<bean id="librosDao" class="com.grupoatrium.persistencia.impl.LibrosDAO" parent="conexion"/>
+	
+		<bean id="editorialesDao" class="com.grupoatrium.persistencia.impl.EditorialesDAO">
+			<property name="connMgr" ref="connectionMgr2"/>
+		</bean>
+
+	<!-- 12- Cargas eager y lazy -->	
+	<bean id="autor12" class="com.grupoatrium.modelo.extra.AutorExtra"
+		lazy-init="true">
+		<property name="comentarios" value="Del Director EXTRA" />
+		<property name="nacionalidad" value="Español" />
+		<property name="nombre" value="autor12" />
+	</bean>
+	
+</beans>
+

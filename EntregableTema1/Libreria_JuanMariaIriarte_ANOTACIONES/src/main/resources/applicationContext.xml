@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- Esto es necesario para el tercer método de Ciclo de vida
+	default-init-method="init" default-destroy-method="destroyMetodo" -->
+	
+	<!-- Esto es para el segundo método 
+	Para que Spring reconozca las anotaciones se ha añadido arriba también 
+	xmlns:context="http://www.springframework.org/schema/context
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd"-->
+	<context:annotation-config />
+	
+
+	
+	<!-- 1- Declaración de un bean simple -->
+	
+		<!-- @Component en la clase autor--> 
+	
+	<!-- 2- Declaración de un bean simple y su alias-->	
+	
+		<!-- @Component("direccionAlias") en la clase direccion--> 
+
+	
+	<!-- 3- Inyección de propiedades -->
+	
+		<!-- @Component en la clase editorial y uso de anotaciones para dar valor a las propiedades @Value @Resource--> 
+
+	
+	<!-- 4- Inyección de propiedades colección-->
+
+		<!-- Estp es la lista de autores que hemos definido en la clase, ya que no se puede -->
+		<util:list id="autores4" value-type="com.grupoatrium.modelo.Autor">
+					<ref bean="autor" />
+					<bean class="com.grupoatrium.modelo.Autor">
+						<property name="comentarios" value="Del Director EXTRA" />
+						<property name="nacionalidad" value="Español" />
+						<property name="nombre" value="autores16.3" />
+					</bean>
+		</util:list>
+			
+	<!-- 10- Ciclo de vida -->
+	<!-- Resuelto con @PostConstruct y @PreDestroy -->
+			
+	<!-- 11 -Cargamos el archivo de propiedades base de datos - Required-->
+		
+		<!-- Cargado el fichero de propiedades en la clase connectionMgr -->
+		<bean id="librosDAO" class="com.grupoatrium.persistencia.impl.LibrosDAO">
+			<property name="connMgr" ref="connectionMgr" />
+		</bean>   
+
+	<!-- 12- Cargas eager y lazy -->	
+		
+		<!-- Uso de la notación @Lazy -->
+
+
+	
+		<context:component-scan base-package="com.grupoatrium" />
+</beans>
+

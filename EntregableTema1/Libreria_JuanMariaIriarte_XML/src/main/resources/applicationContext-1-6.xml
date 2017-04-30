@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	default-init-method="initMetodo" default-destroy-method="destroyMetodo"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- Esto es necesario para el tercer método de Ciclo de vida
+	default-init-method="init" default-destroy-method="destroyMetodo" -->
+	
+
+	<!-- 1- Declaración de un bean simple -->
+	<bean id="autor" class="com.grupoatrium.modelo.Autor" />
+	
+	<!-- 2- Declaración de un bean simple y su alias-->	
+	<bean id="direccion" class="com.grupoatrium.modelo.Direccion" />
+	
+	<alias name="direccion" alias="direccionAlias"/>
+	
+	<!-- 3- Inyección de propiedades -->
+	<bean id="editorial" class="com.grupoatrium.modelo.Editorial">
+		<property name="nombre">
+			<value type="java.lang.String">Almixu</value>
+		</property>
+		<property name="direccion" ref="direccion"/>
+		<property name="nif">
+			<value type="java.lang.String">34567890A</value>
+		</property>
+	</bean>
+	
+	<!-- 4- Inyección de propiedades colección-->
+	<bean id="libro" class="com.grupoatrium.modelo.Libro">
+		<property name="isbn" value="345678910-A-356-BT" />
+		<property name="titulo" value="Almixuwanadu" />
+		<property name="editorial" ref="editorial"/>
+		<property name="publicacion" value="3000" />
+		<property name="precio" value="19.50" />
+		<property name="descripcion" value="Chachiguay" />
+		<property name="autores">
+		
+			<list value-type="com.grupoatrium.modelo.Autor">
+				<ref bean="autor" />
+
+				<!-- Bean interno -->
+				<bean id="autor2" class="com.grupoatrium.modelo.Autor">
+					<property name="comentarios" value="Del Director" />
+					<property name="nacionalidad" value="Español" />
+					<property name="nombre" value="Pedro" />
+				</bean>
+				
+				<!-- Bean anonimo -->
+				<bean class="com.grupoatrium.modelo.Autor">
+					<property name="comentarios" value="Anonimos" />
+					<property name="nacionalidad" value="Español" />
+					<property name="nombre" value="Anonimo" />
+				</bean>
+
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 5- Inyección de dependencias a través del constructor -->
+		<!-- sin argumentos -->
+		<bean id="autor5.1" class="com.grupoatrium.modelo.Autor" />
+	
+		<!-- con argumentos -->
+		<bean id="autor5.2" class="com.grupoatrium.modelo.Autor">
+			<constructor-arg value="autor5.2" />
+			<constructor-arg value="Español" />
+			<constructor-arg value="Del Director" />
+		</bean>
+		
+		<!-- resolver ambigüedad del tipo, lo especificamos-->
+		<bean id="autor5.3" class="com.grupoatrium.modelo.Autor">
+			<constructor-arg type="java.lang.String" value="autor5.3" />
+			<constructor-arg type="java.lang.String" value="Español" />
+			<constructor-arg type="java.lang.String" value="Del Director" />
+		</bean>
+		
+		<!-- resolver ambigüedad indicando la posición del argumento en el constructor-->
+		<bean id="editorial5.4" class="com.grupoatrium.modelo.Editorial">
+		<constructor-arg index="0" value="Almixu" />
+		<constructor-arg index="1" ref="direccion5.5" />
+		<constructor-arg index="2" value="34567890A" />
+		</bean>
+
+		<!-- resolver ambigüedad indicando el nombre del argumento-->
+		<bean id="direccion5.5" class="com.grupoatrium.modelo.Direccion">
+			<constructor-arg name="calle" value="Pl/ Gafaut" />
+			<constructor-arg name="numero" value="666555444" />
+			<constructor-arg name="poblacion" value="Vinalesa" />		
+			<constructor-arg name="cp" value="46114" />		
+			<constructor-arg name="provincia" value="Valencia" />		
+		</bean>
+	
+	<!-- 6- Bean Anónimo -->
+	<bean class="com.grupoatrium.modelo.Autor">
+		<property name="comentarios" value="Anonimos" />
+		<property name="nacionalidad" value="Español" />
+		<property name="nombre" value="Anonimo6" />
+	</bean>
+	
+</beans>
+

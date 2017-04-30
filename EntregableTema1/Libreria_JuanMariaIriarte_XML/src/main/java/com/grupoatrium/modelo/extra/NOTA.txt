@@ -1,0 +1,6 @@
+Estas clases son para probar cosas como la factoría, ya que con 
+las clases tal como están construidas nos es 
+imposible, ya que para probar esto requiere un patrón singleton por ejemplo
+
+DireccionExtra -> Factoria
+AutorExtra -> Ciclo de vida
