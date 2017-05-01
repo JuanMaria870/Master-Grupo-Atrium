@@ -1,0 +1,2 @@
+Clases para probar primary, y comprobar la ambiguedad, ya que hay dos clases que implementan la interfaz
+si no se especifica el bean que se va a utilizar da un error

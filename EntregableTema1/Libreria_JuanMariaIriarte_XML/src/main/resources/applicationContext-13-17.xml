@@ -219,6 +219,13 @@
 		<!-- Esta por defecto byType y coje connMgr-->
 		<bean id="editorialesDaoAutorwire" class="com.grupoatrium.persistencia.impl.EditorialesDAO"
 			autowire="byType"/>
+			
+	<!-- 20- Bean Principal -->
+		<bean id="autor20" class="com.grupoatrium.modelo.Autor" primary="true">
+			<property name="comentarios" value="autorPrimary" />
+			<property name="nacionalidad" value="autorPrimary" />
+			<property name="nombre" value="autorPrimary" />
+		</bean>
 	
 </beans>
 

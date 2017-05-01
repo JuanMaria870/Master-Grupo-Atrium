@@ -1,2 +1,3 @@
 Clases para probar qualified, y comprobar la ambiguedad, ya que hay dos clases que implementan la interfaz
 si no se especifica el bean que se va a utilizar da un error
+Declaramos ImplementacionTest1 como Primary para el ejercicio 20

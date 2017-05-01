@@ -39,7 +39,7 @@ public class AppMain {
 		// AbstractApplicationContext context = new
 		// ClassPathXmlApplicationContext("applicationContext-imports.xml");
 
-		// Escaner para recoger la opción seleccionada por consola
+		// Escáner para recoger la opción seleccionada por consola
 		entradaEscaner = new Scanner(System.in);
 		String entradaTeclado = "";
 
@@ -62,6 +62,7 @@ public class AppMain {
 		System.out.println("15- Espacio de nombre p");
 		System.out.println("16- Espacio de nombre útils");
 		System.out.println("17- Autowire");
+		System.out.println("20- Bean Principal");
 
 		entradaTeclado = entradaEscaner.nextLine();
 		switch (entradaTeclado) {
@@ -116,6 +117,9 @@ public class AppMain {
 		case "17":
 			autowire(context);
 			break;
+		case "20":
+			principal(context);
+			break;			
 		default:
 			declaracionBeanSimple(context);
 			declaracionBeanSimpleYAlias(context);
@@ -438,6 +442,21 @@ public class AppMain {
 
 		EditorialesDAO editorialDao = context.getBean("editorialesDaoAutorwire", EditorialesDAO.class);
 		System.out.println(editorialDao);
+
+	}
+	
+	/**
+	 * 20- Bean Principal
+	 * 
+	 * @param context
+	 */
+	public static void principal(ApplicationContext context) {
+
+		System.out.println("20- Bean Principal");
+
+		Autor autor = context.getBean(Autor.class);
+		
+		System.out.println(autor);
 
 	}
 

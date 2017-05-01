@@ -10,7 +10,6 @@ import com.grupoatrium.persistencia.impl.ConnectionMgr;
 public class LibrosExtraDAO {
 
 	@Autowired
-	@Qualifier("connectionMgr")
 	private ConnectionMgr connMgr;
 
 	/**

@@ -13,6 +13,7 @@ import com.grupoatrium.modelo.Libro;
 import com.grupoatrium.modelo.extra.AutorExtra;
 import com.grupoatrium.modelo.extra.DireccionExtra;
 import com.grupoatrium.modelo.extra.LibrosExtraDAO;
+import com.grupoatrium.modelo.qualifed.InterfazTest;
 import com.grupoatrium.modelo.qualifed.UsaObjetoQImplementaInt;
 import com.grupoatrium.persistencia.impl.EditorialesDAO;
 import com.grupoatrium.persistencia.impl.LibrosDAO;
@@ -23,13 +24,12 @@ public class AppMain {
 
 	public static void main(String[] args) {
 
-		// Levantar el contexto de Spring aasdf
+		// Levantar el contexto de Spring
 
 		// Crear el contenedor de beans a partir del archivo
-
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-
-		// Escaner para recoger la opción seleccionada por consola
+		
+		// Escáner para recoger la opción seleccionada por consola
 		entradaEscaner = new Scanner(System.in);
 		String entradaTeclado = "";
 
@@ -39,13 +39,12 @@ public class AppMain {
 		System.out.println("2- Declaración de un bean simple y su alias");
 		System.out.println("3- Inyección de propiedades");
 		System.out.println("4- Inyección de propiedades colección");
-		System.out.println("5-9 Estos ejercicios no tienen versión en anotación");
 		System.out.println("10- Ciclo de vida");
 		System.out.println("11- Cargamos el archivo de propiedades base de datos - Required");
-		System.out.println("12-Cargas eager y lazy");
-		System.out.println("14-16 Estos ejercicios no tienen versión en anotación");
+		System.out.println("12- Cargas eager y lazy");
 		System.out.println("17- Autowire");
 		System.out.println("18- Qualified");
+		System.out.println("20- Bean Principal");
 
 		entradaTeclado = entradaEscaner.nextLine();
 		switch (entradaTeclado) {
@@ -76,7 +75,10 @@ public class AppMain {
 		case "18":
 			qualified(context);
 			break;
-
+		case "20":
+			principal(context);
+			break;
+			
 		default:
 			declaracionBeanSimple(context);
 			declaracionBeanSimpleYAlias(context);
@@ -87,6 +89,7 @@ public class AppMain {
 			cargaLazy(context);
 			autowire(context);
 			qualified(context);
+			principal(context);
 			break;
 		}
 
@@ -237,6 +240,21 @@ public class AppMain {
 				UsaObjetoQImplementaInt.class);
 		usaObjetoQImplementaInt.getTest().metodo1();
 		usaObjetoQImplementaInt.getTest2().metodo1();
+
+	}
+	
+	/**
+	 * 20- Bean Principal
+	 * 
+	 * @param context
+	 */
+	public static void principal(ApplicationContext context) {
+
+		System.out.println("20- Bean Principal");
+
+		InterfazTest interfazTest = context.getBean(InterfazTest.class);
+		
+		interfazTest.metodo1();
 
 	}
 
