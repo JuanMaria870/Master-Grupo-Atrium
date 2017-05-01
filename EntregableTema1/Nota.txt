@@ -2,34 +2,10 @@
  
  Ejercicio Tema 1
  
- El ejercicio principal es la versi髇 XML
- Despu閟 cree la versi髇 con anotaciones y por 鷏timo la configuraci髇 con clases Java
- Los mini ejercicios dentro de cada versi髇 son los siguientes, no todos tienen todos ya que algunos son concretos de su versi髇
- y o no tienen versi髇 o no he encontrado una forma de realizarlo
+ El ejercicio principal es la versi贸n XML
+ Despu茅s cree la versi贸n con anotaciones y por 煤ltimo la configuraci贸n con clases Java
+ Los mini ejercicios dentro de cada versi贸n son los siguientes, no todos tienen todos ya que algunos son concretos de su versi贸n
+ y o no tienen versi贸n o no he encontrado una forma de realizarlo
  
- Las aplicaciones se lanzan y se introduce la opci髇 para probar, 
- o bien se pulsa 0 y se lanzan todas las funciones (realmente introduciendo cualquier cosa excepto uno de los n鷐eros)
-
- 
-																   XML				ANOTACIONES					JAVA-CONFIG
- 0- Lanzar todos													X					X							X	
- 1- Declaraci髇 de un bean simple									X					X							X	
- 2- Declaraci髇 de un bean simple y su alias						X					X							X	
- 3- Inyecci髇 de propiedades										X					X							X	
- 4- Inyecci髇 de propiedades colecci髇								X					-							X	
- 5- Inyecci髇 de dependencias a trav閟 del constructor				X					-							X	
- 6- Bean An髇imo													X					-							X	
- 7- Bean Interno													X					-							X	
- 8- Herencia y bean abstracto										X					-							X	
- 9- Factor韆s														X					-							X	
-10- Ciclo de vida													X					X							X	
-11- Cargamos el archivo de propiedades base de datos				X					X							X	
-12- Cargas eager y lazy												X					X							X	
-13- 羗bitos de un bean												X					-							-	
-14- Espacio de nombre c												X					-							-	
-15- Espacio de nombre p												X					-							-	
-16- Espacio de nombre 鷗ils											X					-							-	
-17- Autowire														X					X							-	
-18- Qualified														-					X							-
-19- Conditional														-					-							X	
-20- Bean Principal													X					X							X	
+ Las aplicaciones se lanzan y se introduce la opci贸n para probar, 
+ o bien se pulsa 0 y se lanzan todas las funciones (realmente introduciendo cualquier cosa excepto uno de los n煤meros)
