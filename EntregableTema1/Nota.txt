@@ -4,8 +4,8 @@
  
  El ejercicio principal es la versión XML
  Después cree la versión con anotaciones y por último la configuración con clases Java
- Los mini ejercicios dentro de cada versión son los siguientes, no todos tienen todos ya que algunos son concretos de su versión
+ Hay mini ejercicios dentro de cada versión, no todos tienen los mismos, aunque he mantenido la numeración, ya que algunos son concretos de su versión
  y o no tienen versión o no he encontrado una forma de realizarlo
  
- Las aplicaciones se lanzan y se introduce la opción para probar, 
+ Las aplicaciones se lanzan y se introduce por consola la opción para probar, 
  o bien se pulsa 0 y se lanzan todas las funciones (realmente introduciendo cualquier cosa excepto uno de los números)
