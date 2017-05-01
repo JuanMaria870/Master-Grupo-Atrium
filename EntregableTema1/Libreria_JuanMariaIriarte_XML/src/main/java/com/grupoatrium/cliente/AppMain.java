@@ -119,7 +119,7 @@ public class AppMain {
 			break;
 		case "20":
 			principal(context);
-			break;			
+			break;
 		default:
 			declaracionBeanSimple(context);
 			declaracionBeanSimpleYAlias(context);
@@ -138,6 +138,7 @@ public class AppMain {
 			espacioNombresP(context);
 			espacioNombresUtils(context);
 			autowire(context);
+			principal(context);
 			break;
 		}
 
@@ -444,7 +445,7 @@ public class AppMain {
 		System.out.println(editorialDao);
 
 	}
-	
+
 	/**
 	 * 20- Bean Principal
 	 * 
@@ -455,7 +456,7 @@ public class AppMain {
 		System.out.println("20- Bean Principal");
 
 		Autor autor = context.getBean(Autor.class);
-		
+
 		System.out.println(autor);
 
 	}
