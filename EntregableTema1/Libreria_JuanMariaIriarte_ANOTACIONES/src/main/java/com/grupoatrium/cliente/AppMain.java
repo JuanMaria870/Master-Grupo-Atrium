@@ -23,7 +23,7 @@ public class AppMain {
 
 	public static void main(String[] args) {
 
-		// Levantar el contexto de Spring
+		// Levantar el contexto de Spring aasdf
 
 		// Crear el contenedor de beans a partir del archivo
 
