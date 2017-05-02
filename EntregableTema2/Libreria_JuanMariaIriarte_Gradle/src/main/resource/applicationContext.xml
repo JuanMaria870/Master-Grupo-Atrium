@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	
+	<!-- Autor -->
+	<bean id="autor" class="com.grupoatrium.modelo.Autor" >
+		<property name="nombre" value="autor" />
+		<property name="comentarios" value="Del Director" />
+		<property name="nacionalidad" value="Español" />
+	</bean>	
+	
+	<!-- Direccion-->	
+	<bean id="direccion" class="com.grupoatrium.modelo.Direccion">
+		<property name="calle" value="Pl/ Gafaut" />
+		<property name="numero" value="666555444" />
+		<property name="poblacion" value="Vinalesa" />		
+		<property name="cp" value="46114" />		
+		<property name="provincia" value="Valencia" />		
+	</bean>
+	
+	<!-- Editorial -->
+	<bean id="editorial" class="com.grupoatrium.modelo.Editorial">
+		<property name="nombre">
+			<value type="java.lang.String">Almixu</value>
+		</property>
+		<property name="direccion" ref="direccion"/>
+		<property name="nif">
+			<value type="java.lang.String">34567890A</value>
+		</property>
+	</bean>
+	
+	<!-- Libro-->
+	<bean id="libro" class="com.grupoatrium.modelo.Libro">
+		<property name="isbn" value="345678910-A-356-BT" />
+		<property name="titulo" value="Almixuwanadu" />
+		<property name="editorial" ref="editorial"/>
+		<property name="publicacion" value="3000" />
+		<property name="precio" value="19.50" />
+		<property name="descripcion" value="Chachiguay" />
+		<property name="autores">
+		
+			<list value-type="com.grupoatrium.modelo.Autor">
+				<ref bean="autor" />
+
+				<bean id="autor2" class="com.grupoatrium.modelo.Autor">
+					<property name="comentarios" value="Del Director" />
+					<property name="nacionalidad" value="Español" />
+					<property name="nombre" value="Pedro" />
+				</bean>
+				
+				
+				<bean id="autor3" class="com.grupoatrium.modelo.Autor">
+					<property name="comentarios" value="Anonimos" />
+					<property name="nacionalidad" value="Español" />
+					<property name="nombre" value="Anonimo" />
+				</bean>
+
+			</list>
+		</property>
+	</bean>
+	
+	
+		
+	<!-- Cargamos el archivo de propiedades base de datos -->
+
+		<bean id="prodPropertyGroup" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations" value="classpath:config/data-source.properties"/>
+			<property name="placeholderPrefix" value="${dbprod."/>
+		</bean>
+		
+		<bean id="testPropertyGroup" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations" value="classpath:config/data-source-test.properties"/>
+			<property name="placeholderPrefix" value="${dbtest."/>
+		</bean>
+			
+		<bean id="connectionMgr" class="com.grupoatrium.persistencia.impl.ConnectionMgr">
+			<property name="driver" value="${dbprod.driver}" />
+			<property name="url" value="${dbprod.url}" />
+			<property name="user" value="${dbprod.user}" />
+			<property name="password" value="${dbprod.pw}" />
+		</bean>
+		
+		<bean id="connectionMgr2" class="com.grupoatrium.persistencia.impl.ConnectionMgr"
+			autowire-candidate="false">
+			<property name="driver" value="${dbtest.driver}" />
+			<property name="url" value="${dbtest.url}" />
+			<property name="user" value="${dbtest.user}" />
+			<property name="password" value="${dbtest.pw}" />
+		</bean>
+		
+		<bean id="conexion" abstract="true">
+			<property name="connMgr" ref="connectionMgr"/>
+		</bean>
+		
+		<bean id="librosDAO" class="com.grupoatrium.persistencia.impl.LibrosDAO" parent="conexion"/>
+	
+		<bean id="editorialesDAO" class="com.grupoatrium.persistencia.impl.EditorialesDAO">
+			<property name="connMgr" ref="connectionMgr2"/>
+		</bean>
+
+	
+</beans>
+
