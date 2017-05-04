@@ -47,7 +47,17 @@ public class AppTest {
 		System.out.println(editorialesDao);
 
 		assertNotNull(autor);
+		assertNotNull(direccion);
+		assertNotNull(editorial);
+		assertNotNull(libro);
+		assertNotNull(librosDao);
+		assertNotNull(editorialesDao);
 		logger.info(autor);
+		logger.info(direccion);
+		logger.info(editorial);
+		logger.info(libro);
+		logger.info(librosDao);
+		logger.info(editorialesDao);
 	}
 
 }
