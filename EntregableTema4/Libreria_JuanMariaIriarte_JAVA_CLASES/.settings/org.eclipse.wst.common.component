@@ -7,6 +7,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resource"/>
         <property name="java-output-path" value="/Libreria_JuanMariaIriarte/target/classes"/>
-        <property name="context-root" value="Libreria_JuanMariaIriarte_XML_T4"/>
+        <property name="context-root" value="Libreria_JuanMariaIriarte_JAVA_CLASES_T4"/>
     </wb-module>
 </project-modules>
