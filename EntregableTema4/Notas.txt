@@ -1,1 +1,9 @@
-https://github.com/JuanMaria870/Master-Grupo-Atrium
+ Juan Maria Iriarte Ros
+ 
+ Ejercicio Tema 4
+ 
+ El ejercicio principal es la versión XML y de ahí saque la configuración con clases Java
+
+ La aplicación se puede lanzar o bien desde el cliente AppMain, en el paquete com.grupoatrium.cliente, o bien desde test AppMainTest en el paquete del mismo nombre.
+ La versión Test básicamente son 4 clases para probar todas las funciones de los 4 DAO'S que he creado, y desde el AppMainTest se lanzan los test de las 4 clases.
+ En cualquier caso la codificación de los DAO está dentro del paquete com.grupoatrium.persistencia.impl
