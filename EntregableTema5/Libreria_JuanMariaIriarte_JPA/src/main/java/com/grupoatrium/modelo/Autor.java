@@ -1,14 +1,43 @@
 package com.grupoatrium.modelo;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Autor")
 public class Autor {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_autor")
 	private Integer id_autor;
-	private String nombre;
-	private String nacionalidad;
-	private String bibliografia;
-	private Set<Libro> libros;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "nacionalidad")
+    private String nacionalidad;
+    @Column(name = "bibliografia")
+    private String bibliografia;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name="AUTOR_LIBRO", 
+				joinColumns={@JoinColumn(name="autor_id", referencedColumnName="id_autor")}, 
+				inverseJoinColumns={@JoinColumn(name="libro_id", referencedColumnName="id_libro")})
+	private Set<Libro> libros  = new HashSet<Libro>();
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="fk_direccion",referencedColumnName="id_direccion")
 	private Direccion direccion;
 
 	/**
@@ -27,7 +56,7 @@ public class Autor {
 	 * @param fk_direccion
 	 * @param direccion
 	 */
-	public Autor(Integer id_autor, String nombre, String nacionalidad, String bibliografia, Set<Libro> libros, Direccion direccion) {
+	public Autor(Integer id_autor, String nombre, String nacionalidad, String bibliografia, Direccion direccion, Set<Libro> libros) {
 		super();
 		this.id_autor = id_autor;
 		this.nombre = nombre;

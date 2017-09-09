@@ -1,13 +1,31 @@
 package com.grupoatrium.modelo;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Editorial")
 public class Editorial {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_editorial")
 	private Integer id_editorial;
+    @Column(name = "nombre")
 	private String nombre;
+    @Column(name = "nif_cif")
 	private String nif_cif;
-	private Set<Libro> libros;
+	@OneToMany(mappedBy = "editorial", cascade = CascadeType.ALL)
+	private List<Libro> libros = new ArrayList<Libro>();
 
 	/**
 	 * 
@@ -22,7 +40,7 @@ public class Editorial {
 	 * @param nif_cif
 	 * @param libros
 	 */
-	public Editorial(Integer id_editorial, String nombre, String nif_cif, Set<Libro> libros) {
+	public Editorial(Integer id_editorial, String nombre, String nif_cif, List<Libro> libros) {
 		super();
 		this.id_editorial = id_editorial;
 		this.nombre = nombre;
@@ -75,14 +93,14 @@ public class Editorial {
 	/**
 	 * @return the libros
 	 */
-	public Set<Libro> getLibros() {
+	public List<Libro> getLibros() {
 		return libros;
 	}
 
 	/**
 	 * @param libros the libros to set
 	 */
-	public void setLibros(Set<Libro> libros) {
+	public void setLibros(List<Libro> libros) {
 		this.libros = libros;
 	}
 

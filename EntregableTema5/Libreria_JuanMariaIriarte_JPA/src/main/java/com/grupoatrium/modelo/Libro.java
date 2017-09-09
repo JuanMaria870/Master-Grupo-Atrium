@@ -1,20 +1,48 @@
 package com.grupoatrium.modelo;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Component
+@Entity
+@Table(name = "Libro")
 public class Libro {
 
-	private Integer id_libro;
-	private String isbn;
-	private String titulo;
-	private Set<Autor> autores;
-	private Integer publicacion;
-	private Double precio;
-	private String descripcion;
-	private Editorial editorial;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_libro")
+    private Integer id_libro;
+    @Column(name = "isbn")
+    private String isbn;
+    @Column(name = "titulo")
+    private String titulo;
+    @ManyToMany(mappedBy="libros", cascade=CascadeType.ALL)
+    private List<Autor> autores = new ArrayList<Autor>();
+    @Column(name = "publicacion")
+    private Integer publicacion;
+    @Column(name = "precio")
+    private Double precio;
+    @Column(name = "descripcion")
+    private String descripcion;
+    @ManyToOne
+    @JoinColumn(name = "fk_editorial")
+    Editorial editorial;
+	
+
+	    
+		@ManyToMany(cascade=CascadeType.ALL)
+		@JoinColumn(name="fk_libro",referencedColumnName="id_libro")
+	    List<Libro> libros;
 
 	/**
 	 * 
@@ -33,8 +61,8 @@ public class Libro {
 	 * @param descripcion
 	 * @param editorial
 	 */
-	public Libro(Integer id_libro, String isbn, String titulo, Set<Autor> autores, Integer publicacion, Double precio,
-			String descripcion, Editorial editorial) {
+	public Libro(Integer id_libro, String isbn, String titulo, List<Autor> autores, Integer publicacion, Double precio,
+			String descripcion) {
 		super();
 		this.id_libro = id_libro;
 		this.isbn = isbn;
@@ -108,7 +136,7 @@ public class Libro {
 	/**
 	 * @return the autores
 	 */
-	public Set<Autor> getAutores() {
+	public List<Autor> getAutores() {
 		return autores;
 	}
 
@@ -116,7 +144,7 @@ public class Libro {
 	 * @param autores
 	 *            the autores to set
 	 */
-	public void setAutores(Set<Autor> autores) {
+	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
 

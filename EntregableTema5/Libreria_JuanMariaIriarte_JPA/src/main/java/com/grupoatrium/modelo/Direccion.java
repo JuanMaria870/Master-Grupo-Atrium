@@ -1,14 +1,36 @@
 package com.grupoatrium.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Direccion")
 public class Direccion {
 
-	private Integer id_direccion;
-	private String calle;
-	private Integer numero;
-	private String poblacion;
-	private Integer cp;
-	private String provincia;
-	private Autor autor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_direccion")
+    private Integer id_direccion;
+    @Column(name = "calle")
+    private String calle;
+    @Column(name = "numero")
+    private Integer numero;
+    @Column(name = "poblacion")
+    private String poblacion;
+    @Column(name = "cp")
+    private Integer cp;
+    @Column(name = "provincia")
+    private String provincia;
+    @OneToOne(mappedBy="direccion")
+    private Autor autor;
+	
+	
 
 	/**
 	 * 

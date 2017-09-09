@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.grupoatrium</groupId>
-	<artifactId>Libreria_JuanMariaIriarte_HIBERNATE</artifactId>
+	<artifactId>Libreria_JuanMariaIriarte_JPA</artifactId>
 
 <properties>
-  <org.springframework-version>4.3.10.RELEASE</org.springframework-version>
-  <hibernate.version>5.2.9.Final</hibernate.version>
-  <mysql.version>5.1.43</mysql.version>
+  <org.springframework-version>4.0.0.RELEASE</org.springframework-version>
+  <persistence.version>2.5.1</persistence.version>
+  <mysql.version>5.0.8</mysql.version>
 </properties>
   
 	<dependencies>
@@ -18,9 +18,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>			
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>2.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>

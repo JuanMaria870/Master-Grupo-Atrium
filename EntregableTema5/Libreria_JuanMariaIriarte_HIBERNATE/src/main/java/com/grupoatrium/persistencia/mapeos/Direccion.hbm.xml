@@ -20,7 +20,7 @@
 				<param name="property">autor</param>
 			</generator>
 		</id>
-		<one-to-one name="autor" class="com.grupoatrium.modelo.Autor" cascade="all" constrained="true"></one-to-one>
+		<one-to-one name="autor" class="com.grupoatrium.modelo.Autor" constrained="true"></one-to-one>
 
 		<property name="calle" column="calle" type="string" not-null="false" unique="false" length="20" lazy="false"/>
 		<property name="numero" column="numero" type="integer" />
