@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.grupoatrium.modelo">
+	<class name="Editorial" table="EDITORIAL">
+		<meta attribute="class-description">
+			Contiene los datos de las editoriales
+		</meta>
+		
+		 
+			<id name="id_editorial" type="integer" column="id_editorial">
+			<generator class="native" />
+		</id> 
+		<property name="nombre" column="nombre" type="string" not-null="false" unique="false" length="20" lazy="false"/>
+		<property name="nif_cif" column="nif_cif" type="string" />
+
+		<set name="libros" table="libro" 
+				inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="editorial_id" not-null="true" />
+            </key>
+            <one-to-many class="Libro" />
+        </set>
+
+		
+	</class>
+</hibernate-mapping>
