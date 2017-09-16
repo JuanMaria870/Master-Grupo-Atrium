@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+#padre{
+	width: 80%; 
+	margin: 0 auto;  
+	margin-top: 30px;
+}
+
+.form { 
+    font-weight: bold; 
+    color: #117864; 
+    font-size: 20px;
+}
+
+.error { 
+    font-weight: bold; 
+    color: #CB4335; 
+}
+
+.menu { 
+	margin-top: 10px;
+    font-size: 20px;
+}
