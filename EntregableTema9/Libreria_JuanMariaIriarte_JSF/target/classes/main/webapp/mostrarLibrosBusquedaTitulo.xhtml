@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<ui:include src="index.xhtml" />
+</h:head>
+<h:body>
+	<div id="padre">
+		<h:form>
+			<h:dataTable  styleClass="table table-hover table-sm" headerClass="thead-inverse" var="libro" value="#{libroBean.listaBusquedaTitulo()}">
+
+				<h:column scope="row">
+					<!-- Cabecera de la columna -->
+					<f:facet name="header">
+						<f:verbatim>#{msg.id}</f:verbatim>
+					</f:facet>
+					<!-- Fila de datos -->
+					<h:outputText value="#{libro.id_libro}" />
+				</h:column>
+				<h:column>
+					<!-- Cabecera de la columna -->
+					<f:facet name="header">
+						<f:verbatim>#{msg.titulo}</f:verbatim>
+					</f:facet>
+
+					<!-- Fila de datos -->
+					<h:outputText value="#{libro.titulo}" />
+
+				</h:column>
+
+				<h:column>
+					<!-- Cabecera de la columna -->
+					<f:facet name="header">
+						<f:verbatim>#{msg.descripcion}</f:verbatim>
+					</f:facet>
+
+					<!-- Fila de datos -->
+					<h:outputText value="#{libro.descripcion}" />
+
+				</h:column>
+
+				<h:column>
+					<!-- Cabecera de la columna -->
+					<f:facet name="header">
+						<f:verbatim>#{msg.editorial}</f:verbatim>
+					</f:facet>
+
+					<!-- Fila de datos -->
+					<h:outputText value="#{libro.editorial.nombre}" />
+				</h:column>
+
+				<h:column>
+					<!-- Cabecera de la columna -->
+					<f:facet name="header">
+						<f:verbatim>#{msg.precio}</f:verbatim>
+					</f:facet>
+
+					<!-- Fila de datos -->
+					<h:outputText value="#{libro.precio}" />
+				</h:column>
+
+				<h:column>
+					<!-- Cabecera de la columna -->
+					<f:facet name="header">
+						<f:verbatim>#{msg.comprar}</f:verbatim>
+					</f:facet>
+
+					<h:commandLink action="#{libroBean.agregarCarrito(libro.id_libro)}">
+						<h:graphicImage value="#{resource['static/imagenes/carrito.jpg']}" width="50"
+							height="50" />
+					</h:commandLink>
+
+				</h:column>
+			</h:dataTable>
+			<br />
+		</h:form>
+	</div>
+</h:body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<ui:include src="index.xhtml" />
+</h:head>
+<h:body>
+	<div id="padre">
+		<h:form>
+			<div class="form-group">
+				<h:outputLabel value="#{msg.buscar_id}" class="form" />
+				<br />
+				<h:inputText id="id_libro" value="#{libroBean.id_libro}"
+					class="form-control" a:placeholder="#{msg.buscar_id}" onkeypress="return valida(event)">
+					<f:validateLongRange minimum="1" maximum="100" />
+				</h:inputText>
+				<h:message for="id_libro" style="color: red"/>
+				<br />
+			</div>
+			<h:commandButton class="btn btn-primary"
+				action="#{libroBean.busquedaId()}" value="#{msg.boton_buscar}" />
+			<h:commandButton class="btn btn-primary boton_derecho"
+				action="#{libroBean.limpiarId()}" value="#{msg.boton_limpiar}" />
+
+		</h:form>
+	</div>
+</h:body>
+
+</html>

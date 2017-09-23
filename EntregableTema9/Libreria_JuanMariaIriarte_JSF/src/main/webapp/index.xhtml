@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{resource['static/imagenes/libro.png']}" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+		integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+		crossorigin="anonymous" />
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
+
+	<script>
+		function valida(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+
+			//Tecla de retroceso para borrar, siempre la permite
+			if (tecla == 8) {
+				return true;
+			}
+
+			// Patron de entrada, en este caso solo acepta numeros
+			patron = /[0-9]/;
+			tecla_final = String.fromCharCode(tecla);
+			return patron.test(tecla_final);
+		}
+		function validaNumeroYPunto(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+
+			//Tecla de retroceso para borrar, siempre la permite
+			if (tecla == 8 || tecla == 46) {
+				return true;
+			}
+
+			// Patron de entrada, en este caso solo acepta numeros
+			patron = /[0-9]/;
+			tecla_final = String.fromCharCode(tecla);
+			return patron.test(tecla_final);
+		}
+	</script>
+	<h:outputStylesheet name="css/Libreria.css" />
+
+	<title>#{msg.libreria}</title>
+</h:head>
+<h:body>
+	<div class="menu">
+		<h:form>
+			<ul class="nav justify-content-center">
+				<li class="nav-item opciones"><h:commandLink
+						action="mostrarLibros">#{msg.consultar_todos}</h:commandLink></li>
+				<li class="nav-item opciones"><h:commandLink
+						action="mostrarCarrito">#{msg.mostrar_carrito}</h:commandLink></li>
+				<li class="nav-item opciones"><h:commandLink
+						action="vaciarCarrito">#{msg.vaciar_carro}</h:commandLink></li>
+				<li class="nav-item opciones"><h:commandLink
+						action="buscarPorId">#{msg.buscar_por_id}</h:commandLink></li>
+				<li class="nav-item opciones"><h:commandLink
+						action="buscarPorTitulo">#{msg.buscar_por_titulo}</h:commandLink></li>
+				<li class="nav-item opciones"><h:commandLink
+						action="introducirLibro">#{msg.introducir_libro}</h:commandLink></li>
+			</ul>
+		</h:form>
+	</div>
+</h:body>
+</html>

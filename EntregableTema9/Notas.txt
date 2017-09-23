@@ -1,0 +1,21 @@
+ Juan Maria Iriarte Ros
+ 
+ Ejercicio Tema 9
+ 
+ 
+ La aplicación se lanza desde la url:
+http://localhost:8080/Libreria_JuanMariaIriarte_JSF/
+
+ Datos de BBDD
+ 
+ <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+ <property name="url" value="jdbc:mysql://localhost:3306/libreria_jsf_jmir?useSSL=false" />
+ <property name="username" value="root" />
+ <property name="password" value="root" />
+
+ Por defecto creara las tablas en la primera ejecución, dentro de la carpeta src/main/resource/bd, hay un script inicial para cargar libros.
+
+ <prop key="hibernate.hbm2ddl.auto">update</prop>
+
+ 
+

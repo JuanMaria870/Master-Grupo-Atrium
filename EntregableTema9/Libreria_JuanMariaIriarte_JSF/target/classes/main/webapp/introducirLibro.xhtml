@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<ui:include src="index.xhtml" />
+</h:head>
+<h:body>
+	<div id="padre">
+		<h:form>
+
+			<div class="form-group">
+				<h:outputLabel value="#{msg.alta_titulo}" class="form" />
+				<br />
+				<h:inputText id="titulo" value="#{libroBean.titulo}"
+					class="form-control" a:placeholder="#{msg.alta_titulo}">
+					<f:validateLength minimum="3" maximum="20" />
+				</h:inputText>
+				<h:message for="titulo" style="color: red" />
+				<br />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="#{msg.alta_descripcion}" class="form" />
+				<br />
+				<h:inputText id="descripcion" value="#{libroBean.descripcion}"
+					class="form-control" a:placeholder="#{msg.alta_descripcion}">
+					<f:validateLength minimum="3" maximum="20" />
+				</h:inputText>
+				<h:message for="descripcion" style="color: red" />
+				<br />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="#{msg.alta_editorial}" class="form" />
+				<br />
+				<h:inputText id="editorial" value="#{libroBean.nombreEditorial}"
+					class="form-control" a:placeholder="#{msg.alta_editorial}">
+					<f:validateLength minimum="3" maximum="20" />
+				</h:inputText>
+				<h:message for="editorial" style="color: red" />
+				<br />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="#{msg.alta_precio}" class="form" />
+				<br />
+				<h:inputText id="precio" value="#{libroBean.precio}"
+					class="form-control" a:placeholder="#{msg.alta_precio}" onkeypress="return validaNumeroYPunto(event)" maxlength="7">
+					<f:validateDoubleRange minimum="4.0" maximum="1000.0" />
+				</h:inputText>
+				<h:message for="precio" style="color: red" />
+
+				<br />
+			</div>
+
+			<h:commandButton class="btn btn-primary"
+				action="#{libroBean.altaLibro()}" value="#{msg.boton_alta}" />
+
+			<h:commandButton class="btn btn-primary boton_derecho"
+				action="#{libroBean.limpiarAlta()}" value="#{msg.boton_limpiar}" />
+
+
+		</h:form>
+	</div>
+</h:body>
+
+</html>
