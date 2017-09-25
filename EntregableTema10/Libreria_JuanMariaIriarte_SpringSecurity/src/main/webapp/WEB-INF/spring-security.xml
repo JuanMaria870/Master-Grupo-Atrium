@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/security 
+	    http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<http use-expressions="true">
+		<!-- Todas ls peticiones requieren de autenticacion Solo son los usuarios 
+			con role ROLE_USER tienen acceso -->
+		<!-- <intercept-url pattern="/**" /> -->
+
+		<intercept-url pattern="/todos"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/comprar"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/eliminar"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/limpiar"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/mostrarCarro"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/index"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/buscarPorId"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/buscarPorTitulo"
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+
+		<intercept-url pattern="/alta" access="hasRole('ROLE_ADMIN')" />
+		<csrf disabled="true" />
+
+		<form-login login-page="/login" default-target-url="/index"
+			authentication-failure-url="/login" username-parameter="user"
+			password-parameter="password" />
+		<remember-me key="uniqueAndSecret" token-validity-seconds="86400" />
+		<!-- Con la peticion /logout cerramos la sesion y redirigimos a la pagina 
+			index -->
+		<logout logout-success-url="/login" />
+		<!-- Control de sesiones, detectar que haya una sola sesion por usuario -->
+		<session-management>
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" />
+		</session-management>
+
+		<access-denied-handler error-page="/accessDenied" />
+
+	</http>
+
+	<!-- <authentication-manager> <authentication-provider> <user-service> <user 
+		name="admin" password="21232f297a57a5a743894a0e4a801fc3" authorities="ROLE_ADMIN" 
+		/> <user name="user" password="ee11cbb19052e40b07aac0ca060c23ee" authorities="ROLE_USER" 
+		/> </user-service> <password-encoder hash="md5" /> </authentication-provider> 
+		</authentication-manager> -->
+
+	<authentication-manager>
+		<authentication-provider>
+			<!-- <password-encoder hash="md5" /> -->
+			<jdbc-user-service id="jdbcService"
+				data-source-ref="miDataSource"
+				users-by-username-query="select 
+		username,password, enabled from users where username=?"
+				authorities-by-username-query="select 
+		u.username, ur.authority from users u, user_roles ur where u.user_id = ur.user_id 
+		and u.username =? " />
+
+		</authentication-provider>
+	</authentication-manager>
+	<authentication-manager>
+		<authentication-provider user-service-ref="jdbcService" />
+	</authentication-manager>
+
+</beans:beans>

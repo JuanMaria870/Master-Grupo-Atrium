@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.grupoatrium.modelo">
+	<class name="Autor" table="AUTOR">
+		<meta attribute="class-description">
+			Contiene los datos de los autores de los libros
+		</meta>
+		
+		<id name="id_autor" type="integer" column="id_autor">
+			<generator class="native" />
+		</id>
+		<property name="nombre" column="nombre" type="string" not-null="false" unique="false" length="255" lazy="false"/>
+		<property name="nacionalidad" column="nacionalidad" type="string" not-null="false" unique="false" length="255" lazy="false"/>
+		<property name="bibliografia" column="bibliografia" type="string" not-null="false" unique="false" length="255" lazy="false"/>
+		
+		<one-to-one name="direccion" class="com.grupoatrium.modelo.Direccion" cascade="all"></one-to-one>
+		
+	</class>
+</hibernate-mapping>
